@@ -1,0 +1,68 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-top: 2rem;
+}
+
+.form {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+label {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+input[type=text] {
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    margin-right: 1rem;
+}
+
+button {
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #2a9df4;
+    color: #fff;
+    cursor: pointer;
+}
+
+.weather-display {
+    margin-top: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+.temperature {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#weather-icon {
+    width: 100px;
+    height: 100px;
+    margin-right: 1rem;
+}
+
+#temp {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+#description {
+    font-size: 1.5rem;
+}
