@@ -1,4 +1,4 @@
-/* Reset default styles */
+
 body,
 h1,
 h2,
@@ -91,6 +91,7 @@ section {
   padding: 20px;
 }
 
+
 .weather-icon {
   text-align: center;
   margin-bottom: 20px;
@@ -113,8 +114,7 @@ section {
 
 .temperature,
 .wind,
-.humidity,
-.Uv-index {
+.humidity {
   font-size: 14px;
 }
 
@@ -125,10 +125,21 @@ section {
   font-weight: bold;
 }
 
-#forecast {
-    display: flex;
-  margin-top: 20px;
+
+
+
+#forecast div.card {
+    display: inline-block;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+      margin-top: 20px;
+      background-color: #0b12e5;
+      margin-top: 20px;
+    padding: 30px;
+    margin-right: 11px;
 }
+
 
 #forecast h1 {
   font-size: 18px;
@@ -136,8 +147,11 @@ section {
 }
 
 #forecast-day {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+      margin-top: 20px;
 }
 
 

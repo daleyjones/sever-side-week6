@@ -58,25 +58,43 @@ const lookupLocation = (search) => {
 
 const displayCurrentWeather = (myData, currentWeather) => {
   document.getElementById('location-name').textContent = myData.name;
-  document.getElementById('temp-value').textContent = `${currentWeather.temp}(°)`;
-  document.getElementById('wind-value').textContent = `${currentWeather.wind_speed}MPH`;
+  document.getElementById('temp-value').textContent = `${currentWeather.temp}°C`;
+  document.getElementById('wind-value').textContent = `${currentWeather.wind_speed} MPH`;
   document.getElementById('Humid-value').textContent = `${currentWeather.humidity}%`;
-  document.getElementById('uv-value').textContent = `${currentWeather.uvi}`;
+
 };
 
 const displayWeatherForecast = (dailyForecast) => {
   forecastContainer.innerHTML = '';
   for (let i = 0; i < daily_forecast; i++) {
     const card = document.createElement('div');
-    const temp = document.createElement('p');
-    const wind = document.createElement('p');
-    const humid = document.createElement('p');
+    card.classList.add('card');
 
-    temp.textContent = dailyForecast[i].temp.day;
-    wind.textContent = dailyForecast[i].wind_speed;
-    humid.textContent = dailyForecast[i].humidity;
+    const cardHeader = document.createElement('div');
+    cardHeader.classList.add('card-header');
+    cardHeader.innerHTML = `
+      <h2>Day ${i + 1}</h2>
+      <img src="path/to/weather-icon" alt="Weather Icon" />
+    `;
 
-    card.append(temp, wind, humid);
+    const cardBody = document.createElement('div');
+    cardBody.classList.add('card-body');
+    cardBody.innerHTML = `
+      <div class="card-temperature">
+        <span>Temperature:</span>
+        <span>${dailyForecast[i].temp.day}°C</span>
+      </div>
+      <div class="card-wind">
+        <span>Wind:</span>
+        <span>${dailyForecast[i].wind_speed} MPH</span>
+      </div>
+      <div class="card-humidity">
+        <span>Humidity:</span>
+        <span>${dailyForecast[i].humidity}%</span>
+      </div>
+    `;
+
+    card.append(cardHeader, cardBody);
     forecastContainer.append(card);
   }
   forecastContainer.style.display = 'block';
