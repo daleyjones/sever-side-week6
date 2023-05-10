@@ -126,6 +126,7 @@ section {
 }
 
 #forecast {
+    display: flex;
   margin-top: 20px;
 }
 

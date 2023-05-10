@@ -58,9 +58,9 @@ const lookupLocation = (search) => {
 
 const displayCurrentWeather = (myData, currentWeather) => {
   document.getElementById('location-name').textContent = myData.name;
-  document.getElementById('temp-value').textContent = `${currentWeather.temp}`;
-  document.getElementById('wind-value').textContent = `${currentWeather.wind_speed}`;
-  document.getElementById('Humid-value').textContent = `${currentWeather.humidity}`;
+  document.getElementById('temp-value').textContent = `${currentWeather.temp}(°)`;
+  document.getElementById('wind-value').textContent = `${currentWeather.wind_speed}MPH`;
+  document.getElementById('Humid-value').textContent = `${currentWeather.humidity}%`;
   document.getElementById('uv-value').textContent = `${currentWeather.uvi}`;
 };
 
