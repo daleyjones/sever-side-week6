@@ -61,7 +61,6 @@ const displayCurrentWeather = (myData, currentWeather) => {
   document.getElementById('temp-value').textContent = `${currentWeather.temp}°C`;
   document.getElementById('wind-value').textContent = `${currentWeather.wind_speed} MPH`;
   document.getElementById('Humid-value').textContent = `${currentWeather.humidity}%`;
-
 };
 
 const displayWeatherForecast = (dailyForecast) => {
@@ -72,8 +71,13 @@ const displayWeatherForecast = (dailyForecast) => {
 
     const cardHeader = document.createElement('div');
     cardHeader.classList.add('card-header');
+
+  
+    const forecastDate = new Date(dailyForecast[i].dt * 1000);
+    const formattedDate = forecastDate.toDateString();
+
     cardHeader.innerHTML = `
-      <h2>Day ${i + 1}</h2>
+      <h2>${formattedDate}</h2>
       <img src="path/to/weather-icon" alt="Weather Icon" />
     `;
 
@@ -99,3 +103,40 @@ const displayWeatherForecast = (dailyForecast) => {
   }
   forecastContainer.style.display = 'block';
 };
+
+
+
+const saveDestination = (destination) => {
+ 
+  const existingDestinations = localStorage.getItem('destinations');
+  let destinations = existingDestinations ? JSON.parse(existingDestinations) : [];
+
+ 
+  const isExistingDestination = destinations.some(dest => dest.name === destination.name);
+
+  if (!isExistingDestination) {
+    
+    destinations.push(destination);
+
+   
+    localStorage.setItem('destinations', JSON.stringify(destinations));
+  }
+};
+
+
+const retrieveDestinations = () => {
+  const existingDestinations = localStorage.getItem('destinations');
+  let destinations = existingDestinations ? JSON.parse(existingDestinations) : [];
+
+
+  const destinationsContainer = document.getElementById('destinations-container');
+  destinationsContainer.innerHTML = '';
+  destinations.forEach(destination => {
+    const destinationElement = document.createElement('div');
+    destinationElement.textContent = `${destination.name}, ${destination.country}`;
+    destinationsContainer.appendChild(destinationElement);
+  });
+};
+
+
+retrieveDestinations();
