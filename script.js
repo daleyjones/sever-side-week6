@@ -67,21 +67,21 @@ const displayCurrentWeather = (myData, currentWeather) => {
   const weatherIcon = document.createElement('i');
   weatherIcon.classList.add('fas');
 
-  // Set the appropriate weather icon class based on the weather condition code
+  
   if (currentWeather.weather[0].id >= 200 && currentWeather.weather[0].id < 300) {
-    weatherIcon.classList.add('fa-bolt'); // Thunderstorm
+    weatherIcon.classList.add('fa-bolt'); 
   } else if (currentWeather.weather[0].id >= 300 && currentWeather.weather[0].id < 600) {
-    weatherIcon.classList.add('fa-cloud-showers-heavy'); // Rain
+    weatherIcon.classList.add('fa-cloud-showers-heavy'); 
   } else if (currentWeather.weather[0].id >= 600 && currentWeather.weather[0].id < 700) {
-    weatherIcon.classList.add('fa-snowflake'); // Snow
+    weatherIcon.classList.add('fa-snowflake'); 
   } else if (currentWeather.weather[0].id >= 700 && currentWeather.weather[0].id < 800) {
-    weatherIcon.classList.add('fa-smog'); // Mist or fog
+    weatherIcon.classList.add('fa-smog'); 
   } else if (currentWeather.weather[0].id === 800) {
-    weatherIcon.classList.add('fa-sun'); // Clear sky
+    weatherIcon.classList.add('fa-sun'); 
   } else if (currentWeather.weather[0].id > 800) {
-    weatherIcon.classList.add('fa-cloud'); // Cloudy
+    weatherIcon.classList.add('fa-cloud'); 
   } else {
-    weatherIcon.classList.add('fa-question'); // Unknown
+    weatherIcon.classList.add('fa-question'); 
   }
 
   const weatherIconContainer = document.getElementById('weather-icon');
@@ -93,7 +93,7 @@ const displayWeatherForecast = (dailyForecast) => {
   const forecastContainer = document.getElementById('forecast-container');
   forecastContainer.innerHTML = '';
 
-  for (let i = 0; i < dailyForecast.length; i++) { // Corrected variable name "daily_forecast" to "dailyForecast"
+  for (let i = 0; i < dailyForecast.length; i++) { 
     const card = document.createElement('div');
     card.classList.add('card');
 
@@ -130,24 +130,26 @@ const displayWeatherForecast = (dailyForecast) => {
   }
   forecastContainer.style.display = 'block';
 };
-
+console.log()
 const getWeatherIconClass = (weatherId) => {
   if (weatherId >= 200 && weatherId < 300) {
-    return 'fa-bolt'; // Thunderstorm
+    return 'fa-bolt'; 
   } else if (weatherId >= 300 && weatherId < 600) {
-    return 'fa-cloud-showers-heavy'; // Rain
+    return 'fa-cloud-showers-heavy'; 
   } else if (weatherId >= 600 && weatherId < 700) {
-    return 'fa-snowflake'; // Snow
+    return 'fa-snowflake'; 
   } else if (weatherId >= 700 && weatherId < 800) {
-    return 'fa-smog'; // Mist or fog
+    return 'fa-smog'; 
   } else if (weatherId === 800) {
-    return 'fa-sun'; // Clear sky
+    return 'fa-sun'; 
   } else if (weatherId > 800) {
-    return 'fa-cloud'; // Cloudy
+    return 'fa-cloud';
   } else {
-    return 'fa-question'; // Unknown
+    return 'fa-question'; 
   }
+  
 };
+console.log()
 
 const saveDestination = (destination) => {
   const existingDestinations = localStorage.getItem('destinations');
@@ -160,7 +162,7 @@ const saveDestination = (destination) => {
     localStorage.setItem('destinations', JSON.stringify(destinations));
   }
 };
-
+console.log()
 const retrieveDestinations = () => {
   const existingDestinations = localStorage.getItem('destinations');
   let destinations = existingDestinations ? JSON.parse(existingDestinations) : [];
@@ -175,6 +177,3 @@ const retrieveDestinations = () => {
 };
 
 retrieveDestinations();
-
-
-   
