@@ -90,10 +90,12 @@ const displayCurrentWeather = (myData, currentWeather) => {
 };
 
 const displayWeatherForecast = (dailyForecast) => {
-  const forecastContainer = document.getElementById('forecast-container');
-  forecastContainer.innerHTML = '';
-
-  for (let i = 0; i < dailyForecast.length; i++) { 
+    const forecastContainer = document.getElementById('forecast-container');
+    forecastContainer.innerHTML = '';
+  
+    const numDays = Math.min(dailyForecast.length, 5);
+  
+    for (let i = 0; i < numDays; i++) {
     const card = document.createElement('div');
     card.classList.add('card');
 
