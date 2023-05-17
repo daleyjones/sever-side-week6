@@ -48,13 +48,14 @@ body {
     margin-top: 10px;
   }
   
-  .error {
+  /* .error {
     color: red;
     margin-top: 10px;
   }
-  
+   */
   .recent-sect {
-    font-size: 14px;
+    font-size: 20px;
+   
   }
   
   section {
@@ -63,6 +64,9 @@ body {
     padding: 20px;
   }
   
+  #weather {
+    border-radius: 10px;
+  }
   
   .weather-icon {
     text-align: center;
@@ -84,7 +88,7 @@ body {
     padding: 5px 0;
   }
   
-  .temperature,
+  /* .temperature,
   .wind,
   .humidity {
     font-size: 14px;
@@ -96,7 +100,7 @@ body {
   .Uv-index span {
     font-weight: bold;
   }
-  
+   */
   
   
   
@@ -106,7 +110,7 @@ body {
       flex-wrap: wrap;
       justify-content: space-around;
         margin-top: 20px;
-        background-color: #34acec;
+        background-color: #0b49e4;
         margin-top: 20px;
       padding: 10px;
       margin-right: 11px;
