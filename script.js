@@ -28,37 +28,53 @@ const setLocationError = (text) => {
 };
 
 const lookupLocation = (search) => {
-  const apiUrl = `${api_url}/data/2.5/weather?q=${search}&appid=${apiKey}&units=metric`;
+    const apiUrl = `${api_url}/data/2.5/weather?q=${search}&appid=${apiKey}&units=metric`;
+  
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        const lat = data.coord.lat;
+        const lon = data.coord.lon;
+  
+        const myData = {
+          name: data.name,
+          country: data.sys.country,
+          lat: lat,
+          lon: lon
+        };
+  
+        const forecastUrl = `${api_url}/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&appid=${apiKey}&units=metric`;
+  
+        fetch(forecastUrl)
+          .then(response => response.json())
+          .then(data => {
+            displayCurrentWeather(myData, data.current);
+            displayWeatherForecast(data.daily);
+            saveDestination(myData);
+            retrieveDestinations();
+            const currentDate = new Date();
+            const formattedDate = currentDate.toDateString();
+            const dateElement = document.createElement('div');
+            dateElement.textContent = formattedDate;
+            document.getElementById('location-name').appendChild(dateElement);
+          })
+          .catch(error => console.error(error));
+      })
+      .catch(error => console.error(error));
+  };
 
-  fetch(apiUrl)
-    .then(response => response.json())
-    .then(data => {
-      const lat = data.coord.lat;
-      const lon = data.coord.lon;
 
-      const myData = {
-        name: data.name,
-        country: data.sys.country,
-        lat: lat,
-        lon: lon
-      };
+    const displayCurrentWeather = (myData, currentWeather) => {
+        const locationName = document.getElementById('location-name');
+        locationName.textContent = `${myData.name}, ${myData.country}`;
+      
+        const currentDate = new Date();
+        const formattedDate = currentDate.toDateString();
+        const dateElement = document.createElement('div');
+        dateElement.textContent = formattedDate;
+        locationName.appendChild(dateElement);
 
-      const forecastUrl = `${api_url}/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&appid=${apiKey}&units=metric`;
 
-      fetch(forecastUrl)
-        .then(response => response.json())
-        .then(data => {
-          displayCurrentWeather(myData, data.current);
-          displayWeatherForecast(data.daily);
-          saveDestination(myData);
-          retrieveDestinations();
-        })
-        .catch(error => console.error(error));
-    })
-    .catch(error => console.error(error));
-};
-
-const displayCurrentWeather = (myData, currentWeather) => {
   document.getElementById('location-name').textContent = myData.name;
   document.getElementById('temp-value').textContent = `${currentWeather.temp}°C`;
   document.getElementById('wind-value').textContent = `${currentWeather.wind_speed} MPH`;
