@@ -21,7 +21,7 @@ The weather forecast for the next five days for the specified location will be d
 # Credits
 This project was created by [Daley Jones].
 Link to my weather Dashboard https://daleyjones.github.io/sever-side-week6/
- ![Screenshot of my calender.](./images/2023-05-17.png)
+ ![Screenshot of my calender.](./images/weather.png)
 
 
 
