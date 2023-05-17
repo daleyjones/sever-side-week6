@@ -48,11 +48,7 @@ body {
     margin-top: 10px;
   }
   
-  /* .error {
-    color: red;
-    margin-top: 10px;
-  }
-   */
+
   .recent-sect {
     font-size: 20px;
    
@@ -65,14 +61,12 @@ body {
   }
   
   #weather {
-    border-radius: 10px;
+    border: 3px solid #cccccc;
+    box-shadow: 10px 5px 5px grey
   }
-  
-  .weather-icon {
-    text-align: center;
-    margin-bottom: 20px;
+  #forecast-container ul {
+    border: 5px solid #d81111;
   }
-  
   .weather-location {
     font-size: 20px;
     margin-bottom: 10px;
