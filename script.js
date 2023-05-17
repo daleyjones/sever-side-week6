@@ -50,6 +50,8 @@ const lookupLocation = (search) => {
         .then(data => {
           displayCurrentWeather(myData, data.current);
           displayWeatherForecast(data.daily);
+          saveDestination(myData);
+          retrieveDestinations();
         })
         .catch(error => console.error(error));
     })
@@ -61,24 +63,49 @@ const displayCurrentWeather = (myData, currentWeather) => {
   document.getElementById('temp-value').textContent = `${currentWeather.temp}°C`;
   document.getElementById('wind-value').textContent = `${currentWeather.wind_speed} MPH`;
   document.getElementById('Humid-value').textContent = `${currentWeather.humidity}%`;
+
+  const weatherIcon = document.createElement('i');
+  weatherIcon.classList.add('fas');
+
+  // Set the appropriate weather icon class based on the weather condition code
+  if (currentWeather.weather[0].id >= 200 && currentWeather.weather[0].id < 300) {
+    weatherIcon.classList.add('fa-bolt'); // Thunderstorm
+  } else if (currentWeather.weather[0].id >= 300 && currentWeather.weather[0].id < 600) {
+    weatherIcon.classList.add('fa-cloud-showers-heavy'); // Rain
+  } else if (currentWeather.weather[0].id >= 600 && currentWeather.weather[0].id < 700) {
+    weatherIcon.classList.add('fa-snowflake'); // Snow
+  } else if (currentWeather.weather[0].id >= 700 && currentWeather.weather[0].id < 800) {
+    weatherIcon.classList.add('fa-smog'); // Mist or fog
+  } else if (currentWeather.weather[0].id === 800) {
+    weatherIcon.classList.add('fa-sun'); // Clear sky
+  } else if (currentWeather.weather[0].id > 800) {
+    weatherIcon.classList.add('fa-cloud'); // Cloudy
+  } else {
+    weatherIcon.classList.add('fa-question'); // Unknown
+  }
+
+  const weatherIconContainer = document.getElementById('weather-icon');
+  weatherIconContainer.innerHTML = '';
+  weatherIconContainer.appendChild(weatherIcon);
 };
 
 const displayWeatherForecast = (dailyForecast) => {
+  const forecastContainer = document.getElementById('forecast-container');
   forecastContainer.innerHTML = '';
-  for (let i = 0; i < daily_forecast; i++) {
+
+  for (let i = 0; i < dailyForecast.length; i++) { // Corrected variable name "daily_forecast" to "dailyForecast"
     const card = document.createElement('div');
     card.classList.add('card');
 
     const cardHeader = document.createElement('div');
     cardHeader.classList.add('card-header');
 
-  
     const forecastDate = new Date(dailyForecast[i].dt * 1000);
     const formattedDate = forecastDate.toDateString();
 
     cardHeader.innerHTML = `
       <h2>${formattedDate}</h2>
-      <img src="path/to/weather-icon" alt="Weather Icon" />
+      <i class="fas ${getWeatherIconClass(dailyForecast[i].weather[0].id)}"></i>
     `;
 
     const cardBody = document.createElement('div');
@@ -104,32 +131,41 @@ const displayWeatherForecast = (dailyForecast) => {
   forecastContainer.style.display = 'block';
 };
 
-
-
-const saveDestination = (destination) => {
- 
-  const existingDestinations = localStorage.getItem('destinations');
-  let destinations = existingDestinations ? JSON.parse(existingDestinations) : [];
-
- 
-  const isExistingDestination = destinations.some(dest => dest.name === destination.name);
-
-  if (!isExistingDestination) {
-    
-    destinations.push(destination);
-
-   
-    localStorage.setItem('destinations', JSON.stringify(destinations));
+const getWeatherIconClass = (weatherId) => {
+  if (weatherId >= 200 && weatherId < 300) {
+    return 'fa-bolt'; // Thunderstorm
+  } else if (weatherId >= 300 && weatherId < 600) {
+    return 'fa-cloud-showers-heavy'; // Rain
+  } else if (weatherId >= 600 && weatherId < 700) {
+    return 'fa-snowflake'; // Snow
+  } else if (weatherId >= 700 && weatherId < 800) {
+    return 'fa-smog'; // Mist or fog
+  } else if (weatherId === 800) {
+    return 'fa-sun'; // Clear sky
+  } else if (weatherId > 800) {
+    return 'fa-cloud'; // Cloudy
+  } else {
+    return 'fa-question'; // Unknown
   }
 };
 
+const saveDestination = (destination) => {
+  const existingDestinations = localStorage.getItem('destinations');
+  let destinations = existingDestinations ? JSON.parse(existingDestinations) : [];
+
+  const isExistingDestination = destinations.some(dest => dest.name === destination.name);
+
+  if (!isExistingDestination) {
+    destinations.push(destination);
+    localStorage.setItem('destinations', JSON.stringify(destinations));
+  }
+};
 
 const retrieveDestinations = () => {
   const existingDestinations = localStorage.getItem('destinations');
   let destinations = existingDestinations ? JSON.parse(existingDestinations) : [];
 
-
-  const destinationsContainer = document.getElementById('destinations-container');
+  const destinationsContainer = document.getElementById('recent-locations');
   destinationsContainer.innerHTML = '';
   destinations.forEach(destination => {
     const destinationElement = document.createElement('div');
@@ -138,5 +174,7 @@ const retrieveDestinations = () => {
   });
 };
 
-
 retrieveDestinations();
+
+
+   
