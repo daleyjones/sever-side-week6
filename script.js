@@ -1,4 +1,4 @@
-const apiKey = 'cbc6f32a3bc4fdd4a71fda68f15df340';
+const apiKey = '3770aa61038a0816864d556d797ecb9f';
 const searchBtn = document.getElementById('search');
 const locationInput = document.getElementById('location');
 const forecastContainer = document.getElementById('forecast');
