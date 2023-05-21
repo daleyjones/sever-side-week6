@@ -48,7 +48,19 @@ body {
     margin-top: 10px;
   }
   
-
+  .recent-sect ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .recent-sect li {
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+  
+  .recent-sect li:hover {
+    text-decoration: underline;
+  }
   .recent-sect {
     font-size: 20px;
    

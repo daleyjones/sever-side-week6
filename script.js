@@ -187,11 +187,16 @@ const retrieveDestinations = () => {
 
   const destinationsContainer = document.getElementById('recent-locations');
   destinationsContainer.innerHTML = '';
+
   destinations.forEach(destination => {
-    const destinationElement = document.createElement('div');
+    const destinationElement = document.createElement('li');
     destinationElement.textContent = `${destination.name}, ${destination.country}`;
+
+    // Add onClick event to each destination element
+    destinationElement.addEventListener('click', () => {
+      lookupLocation(destination.name);
+    });
+
     destinationsContainer.appendChild(destinationElement);
   });
 };
-
-retrieveDestinations();
